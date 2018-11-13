@@ -180,8 +180,8 @@ export default class GameMgr extends CubeGameFSM {
 
         // stop cube
         for (let cube of this._cube_array) {
-            cube.removeComponent(cc.Button);
             if (cube) {
+                cube.removeComponent(cc.Button);
                 cube.stopAllActions();
             }
         }

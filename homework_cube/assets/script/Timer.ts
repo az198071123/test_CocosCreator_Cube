@@ -6,7 +6,7 @@ export default class Timer extends cc.Component {
     @property
     private _end_time: number = 0;
     @property
-    onTimeOut: Function;
+    onTimeOut: Function = null;
     startTimer(end_time: number , time_out : Function) {
         this._end_time = end_time;
         this.onTimeOut = time_out;

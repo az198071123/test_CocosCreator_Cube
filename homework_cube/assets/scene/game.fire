@@ -422,7 +422,6 @@
     },
     "_enabled": true,
     "scene_ng": "ng",
-    "_is_loaded_ng": false,
     "_game_level": 0,
     "level_timer": [
       5,
@@ -455,6 +454,8 @@
     "canvas": {
       "__id__": 2
     },
+    "_cube_array": [],
+    "_cube_target": 0,
     "_id": "0bOUtcdapMJJ3PrMHMthEw"
   },
   {
