@@ -2,6 +2,8 @@
 
 版本：Cocos Creator V2.0.5
 
+語言：TypeScript
+
 FSM 工具：[state-machine-editor-for-ccc-ts](https://github.com/linhaiwei123/state-machine-editor-for-ccc-ts.git)
 
 參考教學來源[Cocos 中文社區](https://forum.cocos.com/t/cocos-creator-typescript/46515)
