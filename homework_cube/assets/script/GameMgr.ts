@@ -61,7 +61,7 @@ export default class GameMgr extends CubeGameFSM {
         this._cube_array[this._cube_target - 1] = null;
         this._cube_target += 1;
         if (this._cube_target > cube_count) {
-            this.fireEvent(`game_win`);
+            this.fireEvent(this.eventName.game_win);
         } else {
             this.canvas.getChildByName(`ui`).getChildByName(`label_next`).getComponent(cc.Label).string = `Next: ${this._cube_target}`;
         }
@@ -105,17 +105,17 @@ export default class GameMgr extends CubeGameFSM {
         const btn_level1 = select_game.getChildByName(`btn_level1`).getComponent(cc.Button);
         btn_level1.node.on('click', (btn: cc.Button) => {
             this._game_level = 1;
-            this.fireEvent(`select`);
+            this.fireEvent(this.eventName.select);
         }, this);
         const btn_level2 = select_game.getChildByName(`btn_level2`).getComponent(cc.Button);
         btn_level2.node.on('click', (btn: cc.Button) => {
             this._game_level = 2;
-            this.fireEvent(`select`);
+            this.fireEvent(this.eventName.select);
         }, this);
         const btn_level3 = select_game.getChildByName(`btn_level3`).getComponent(cc.Button);
         btn_level3.node.on('click', (btn: cc.Button) => {
             this._game_level = 3;
-            this.fireEvent(`select`);
+            this.fireEvent(this.eventName.select);
         }, this);
         this.canvas.addChild(select_game, 0, `select_game`);
     }
@@ -156,7 +156,7 @@ export default class GameMgr extends CubeGameFSM {
             this._cube_array.push(cube);
         }
 
-        this.fireEvent(`goto_next`);
+        this.fireEvent(this.eventName.goto_next);
     }
     protected leave_game_init(eventName: string, from: string, to: string, ...args: any[]): void {
         cc.log(`${this.name}.leave_game_init : args:${args}`);
@@ -165,7 +165,7 @@ export default class GameMgr extends CubeGameFSM {
         cc.log(`${this.name}.enter_game_ready : args:${args}`);
         const ready_anime = cc.instantiate(this.prefab_ready_anime);
         ready_anime.getComponent(cc.Animation).on('finished', (event: string) => {
-            this.fireEvent(`game_play`);
+            this.fireEvent(this.eventName.game_play);
         }, this);
         this.canvas.addChild(ready_anime, 0, `ready_anime`);
     }
@@ -185,7 +185,7 @@ export default class GameMgr extends CubeGameFSM {
 
         // start timer
         this.canvas.getChildByName(`ui`).getChildByName(`label_time`).getComponent(Timer).startTimer(timer, () => {
-            this.fireEvent(`time_out`);
+            this.fireEvent(this.eventName.time_out);
         });
         // start cube move
         for (let cube of this._cube_array) {
@@ -220,7 +220,7 @@ export default class GameMgr extends CubeGameFSM {
 
         const game_over_anime = cc.instantiate(this.prefab_game_over_anime);
         game_over_anime.on('click', (btn: cc.Button) => {
-            this.fireEvent(`play_again`);
+            this.fireEvent(this.eventName.play_again);
         }, this);
         this.canvas.addChild(game_over_anime, 0, `game_over_anime`);
 
@@ -234,7 +234,7 @@ export default class GameMgr extends CubeGameFSM {
 
         const btn_back_select_game = cc.instantiate(this.prefab_btn_back_select_game);
         btn_back_select_game.on('click', (btn: cc.Button) => {
-            this.fireEvent(`back_select_game`);
+            this.fireEvent(this.eventName.back_select_game);
         }, this);
         this.canvas.addChild(btn_back_select_game, 0, `btn_back_select_game`);
     }
@@ -248,12 +248,12 @@ export default class GameMgr extends CubeGameFSM {
         cc.log(`${this.name}.enter_game_win : args:${args}`);
         const game_win_anime = cc.instantiate(this.prefab_game_win_anime);
         game_win_anime.on('click', (btn: cc.Button) => {
-            this.fireEvent(`play_again`);
+            this.fireEvent(this.eventName.play_again);
         }, this);
         this.canvas.addChild(game_win_anime, 0, `game_win_anime`);
         // stop timer
         this.canvas.getChildByName(`ui`).getChildByName(`label_time`).removeComponent(Timer);
-        this.fireEvent(`goto_next`);
+        this.fireEvent(this.eventName.goto_next);
     }
     protected leave_game_win(eventName: string, from: string, to: string, ...args: any[]): void {
         cc.log(`${this.name}.leave_game_win : args:${args}`);
