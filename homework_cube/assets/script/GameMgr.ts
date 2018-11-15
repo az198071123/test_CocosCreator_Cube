@@ -242,6 +242,7 @@ export default class GameMgr extends CubeGameFSM {
         cc.log(`${this.name}.leave_game_over : args:${args}`);
         this.canvas.removeChild(this.canvas.getChildByName(`game_over_anime`));
         this.canvas.removeChild(this.canvas.getChildByName(`btn_back_select_game`));
+        this.canvas.removeChild(this.canvas.getChildByName(`ui`));
     }
     protected enter_game_win(eventName: string, from: string, to: string, ...args: any[]): void {
         cc.log(`${this.name}.enter_game_win : args:${args}`);
